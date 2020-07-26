@@ -1,0 +1,11 @@
+midwest <- as.data.frame(ggplot2::midwest)
+View(midwest)
+midwest_new <- rename(midwest, total = poptotal, asian = popasian)
+View(midwest_new)
+midwest_new$proportion <- midwest_new$asian/midwest_new$total
+hist(midwest_new$proportion)
+mean_proportion <- mean(midwest_new$proportion)
+midwest_new$Check <- ifelse(midwest_new$proportion < mean_proportion, "small", "large")
+table(midwest_new$Check)
+library(ggplot2)
+qplot(midwest_new$Check)
